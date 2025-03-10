@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "fold.js",
   "bin": {
-    "tre-cli-peers": "bin/list.js"
+    "peers": "bin/live-peers.js",
+    "about": "bin/about.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,7 +21,6 @@
     "pull-many": "^1.0.9",
     "pull-next": "^1.0.1",
     "pull-notify": "^0.1.2",
-    "pull-stream": "^3.7.0",
-    "tre-cli-client": "^1.2.0"
+    "pull-stream": "^3.7.0"
   }
 }

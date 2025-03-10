@@ -1,13 +1,17 @@
 #!/usr/bin/env node
+
+require('../extra-modules-path')
+
 const pull = require('pull-stream')
-const client = require('../../tre-cli-client')
+const client = require('../lib/tre-client')
 const multicb = require('multicb')
 const {inspect} = require('util')
+const config = require('rc')('tre-peers')
 
 const about = require('../lib/about')
 const LivePeers = require('../lib/live-peers')
 
-client( (err, ssb, conf, keys) => {
+client( config.remote, config, (err, ssb, conf, keys) => {
   const exit = require('../lib/exit')(ssb)
   if (err) exit(err)
 
@@ -52,7 +56,7 @@ client( (err, ssb, conf, keys) => {
 function listLivePeers(ssb, nameCache) {
   const exit = require('../lib/exit')(ssb)
   pull(
-    LivePeers(ssb),
+    LivePeers(config.remote, config),
     pull.asyncMap( (peer, cb)=>{
       const e = nameCache[peer]
       const result = {peer}

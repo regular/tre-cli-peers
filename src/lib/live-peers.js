@@ -1,14 +1,15 @@
 const pull = require('pull-stream')
-const client = require('../../tre-cli-client')
+const client = require('./tre-client')
 const next = require('pull-next')
 const Catch = require('pull-catch')
 const defer = require('pull-defer')
+const debug = require('debug')('live-peers')
 
-module.exports = function(ssb) {
+module.exports = function(remote, config) {
   return pull(
     next( ()=>{
       const deferred = defer.source()
-      client( (err, ssb, conf, keys) => {
+      client(remote, config, (err, ssb, conf, keys) => {
         if (err) return deferred.resolve(pull.error(err))
         deferred.resolve(
           pull(

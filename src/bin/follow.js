@@ -11,22 +11,28 @@ client( (err, ssb, conf, keys) => {
     console.log(data)
   })
   */
+  //list()
+  follow()
 
-  ssb.publish({
-    type: 'contact',
-    following: true,
-    contact: ''
-  }, (err, msg) => {
-    if (err) exit(err)
-    console.log(msg)
-    list()
-  });
+  function follow() {
+    ssb.publish({
+      type: 'contact',
+      following: true,
+      contact: '@9WgLLbgiZx8ynDXhKEwWRPx3y3xKI/NNnAkSwVudfPo=.ed25519'
+    }, (err, msg) => {
+      if (err) exit(err)
+      console.log(msg)
+      list()
+    });
+  }
 
   function list() {
     pull(
       ssb.messagesByType('contact'),
-      pull.drain(e=>{
-        console.log(e)
+      pull.drain( ({value})=>{
+        const {author, content} = value;
+        const {following, contact} = content
+        console.log(author, following, contact)
       }, exit)
     )
   }
