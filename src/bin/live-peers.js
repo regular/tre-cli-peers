@@ -46,7 +46,8 @@ client( config.remote, config, (err, ssb, conf, keys) => {
       add(e, 'stations', station, aboutSelf)
       cache[about] = e
     }, err=>{
-      exit(err)
+      console.error('about strem ended: ' + err.message)
+      //exit(err)
     })
   )
 
