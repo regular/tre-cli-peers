@@ -1,9 +1,5 @@
 
-list live peers and show names, roles, abd hostnames (connect to pub)
+list live peers and show names, roles, abd hostnames
 
-node bin/live-peers.js --config /some/where/.trerc --remote mypub
-
-where mypub is an entry in
-.tre/remotes
-
+peers --socketPath PATH_TO_UNIX_SOCKET
 

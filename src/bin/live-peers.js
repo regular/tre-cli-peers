@@ -3,7 +3,7 @@
 require('../extra-modules-path')
 
 const pull = require('pull-stream')
-const client = require('../lib/tre-client')
+const client = require('tre-cli-client')
 const multicb = require('multicb')
 const {inspect} = require('util')
 const config = require('rc')('tre-peers')
@@ -11,7 +11,8 @@ const config = require('rc')('tre-peers')
 const about = require('../lib/about')
 const LivePeers = require('../lib/live-peers')
 
-client( config.remote, config, (err, ssb, conf, keys) => {
+client( (err, ssb, conf, keys) =>{
+//client( config.remote, config, (err, ssb, conf, keys) => {
   const exit = require('../lib/exit')(ssb)
   if (err) exit(err)
 
